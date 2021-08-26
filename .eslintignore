@@ -1,0 +1,3 @@
+# Ignore built files except build/app.js
+
+build

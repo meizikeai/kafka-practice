@@ -1,44 +1,44 @@
-import mysql from 'mysql2'
-import releaseMySQL from '../config/release-mysql'
-import testMySQL from '../config/test-mysql'
-import { getRandomSubscript } from '../libs/random'
-import { handleCache, getCache } from '../libs/cache-store'
-import { isPro, isLocalPro } from '../config/env'
+import mysql from "mysql2";
+import releaseMySQL from "../config/release-mysql";
+import testMySQL from "../config/test-mysql";
+import { getRandomSubscript } from "../libs/random";
+import { handleCache, getCache } from "../libs/cache-store";
+import { isPro, isLocalPro } from "../config/env";
 
 function handleMySQL(key: string) {
-  let datum = testMySQL
+  let datum = testMySQL;
 
   if (isPro || isLocalPro) {
-    datum = releaseMySQL
+    datum = releaseMySQL;
   }
 
-  const result: any = {}
-  const [where, branch] = key.split('.')
-  const zk = getCache('mysql')
+  const result: any = {};
+  const [where, branch] = key.split(".");
+  const zk = getCache("mysql");
 
-  datum = Object.assign(datum, zk)
+  datum = Object.assign(datum, zk);
 
   if (!datum[where]) {
-    throw new Error(`Can not find the key: ${where}`)
+    throw new Error(`Can not find the key: ${where}`);
   }
 
   for (const k in datum) {
     if (k !== where) {
-      continue
+      continue;
     }
 
-    const config = datum[k]
-    let data = config.master
+    const config = datum[k];
+    let data = config.master;
 
-    if (branch === 'slave') {
-      data = config.slave
+    if (branch === "slave") {
+      data = config.slave;
     }
 
-    result[key] = []
+    result[key] = [];
 
     for (let i = 0; i < data.length; i++) {
-      const element = data[i]
-      const [host, port] = element.split(':')
+      const element = data[i];
+      const [host, port] = element.split(":");
       const pool = mysql.createPool({
         host: host,
         port: Number(port) || 3306,
@@ -48,25 +48,25 @@ function handleMySQL(key: string) {
         connectionLimit: config.connection || 100,
         connectTimeout: 5000,
         waitForConnections: true,
-      })
-      const client = pool.promise()
+      });
+      const client = pool.promise();
 
-      result[key][i] = client
+      result[key][i] = client;
     }
   }
 
-  return result
+  return result;
 }
 
 function getClient(key: string) {
   const pool = handleCache(`mysql.${key}`, () => {
-    const client = handleMySQL(key)
-    const index = getRandomSubscript(client[key].length)
+    const client = handleMySQL(key);
+    const index = getRandomSubscript(client[key].length);
 
-    return client[key][index]
-  })
+    return client[key][index];
+  });
 
-  return pool
+  return pool;
 }
 
-export default getClient
+export default getClient;

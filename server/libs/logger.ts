@@ -1,3 +1,3 @@
-import logger from 'lucky-logger'
+import logger from "lucky-logger";
 
-export default logger({ appName: 'kafka-practice' })
+export default logger({ appName: "kafka-practice" });

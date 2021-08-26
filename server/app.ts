@@ -1,7 +1,7 @@
-import main from './controllers/kafka'
-import { awaitZookeeper, handleZookeeper } from './libs/zookeeper'
+import main from "./controllers/kafka";
+import { awaitZookeeper, handleZookeeper } from "./libs/zookeeper";
 
-handleZookeeper()
+handleZookeeper();
 awaitZookeeper().then(() => {
-  main()
-})
+  main();
+});

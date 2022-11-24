@@ -1,17 +1,17 @@
-import getMysqlClient from "../libs/mysql";
-import getRedisClient from "../libs/redis";
-import getserverClient from "../libs/server";
+import getMysqlClient from '../libs/mysql'
+import getRedisClient from '../libs/redis'
+import getserverClient from '../libs/server'
 
 const mysqlClient = (key: string) => {
-  return getMysqlClient(key);
-};
+  return getMysqlClient(key)
+}
 
 const redisClient = (key: string) => {
-  return getRedisClient(key);
-};
+  return getRedisClient(key)
+}
 
 const serverClient = (key: string) => {
-  return getserverClient(key);
-};
+  return getserverClient(key)
+}
 
-export { mysqlClient, redisClient, serverClient };
+export { mysqlClient, redisClient, serverClient }

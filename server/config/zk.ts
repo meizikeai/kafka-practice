@@ -1,13 +1,13 @@
 const zk: { [key: string]: { [key: string]: string } } = {
   mysql: {
-    activity: "/blued/backend/udb/livedata_activity",
+    activity: '/blued/backend/udb/livedata_activity',
   },
   redis: {
-    users: "/blued/backend/umem/users",
+    users: '/blued/backend/umem/users',
   },
   server: {
-    send: "/blued/service/hermes/send",
+    send: '/blued/service/hermes/send',
   },
-};
+}
 
-export default zk;
+export default zk

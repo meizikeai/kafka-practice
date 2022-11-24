@@ -1,19 +1,13 @@
 module.exports = {
   env: {
-    browser: true,
-    es6: true,
     node: true,
   },
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 13,
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   rules: {
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
-};
+}

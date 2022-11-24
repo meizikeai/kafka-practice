@@ -13,8 +13,7 @@
     "production": "NODE_ENV=production NODE_DEV=localPro nodemon build/app.js",
     "watch": "tsc -w",
     "build": "rm -rf ./build/* && tsc",
-    "check": "eslint --ext .ts,.js . --fix",
-    "prepare": "husky install"
+    "check": "eslint --ext .ts,.js . --fix"
   },
   "keywords": [],
   "author": "meizikeai@163.com",
@@ -24,24 +23,21 @@
     "url": "https://github.com/meizikeai/kafka-practice.git"
   },
   "dependencies": {
-    "ioredis": "^4.27.8",
-    "kafkajs": "^1.15.0",
+    "ioredis": "^5.2.4",
+    "kafkajs": "^2.2.3",
     "lucky-logger": "^0.0.3",
-    "mysql2": "^2.3.0",
-    "zookeeper": "^4.10.0"
+    "mysql2": "^2.3.3",
+    "zookeeper": "^5.6.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
-    "@types/ioredis": "^4.27.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
-    "@typescript-eslint/parser": "^4.29.3",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "husky": "^7.0.2",
-    "nodemon": "^2.0.12",
-    "prettier": "^2.3.2",
-    "typescript": "^4.3.5"
+    "@types/ioredis": "^4.28.10",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3"
   }
 }

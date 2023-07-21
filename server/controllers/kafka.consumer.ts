@@ -1,44 +1,33 @@
 import { Kafka } from 'kafkajs'
-// import logger from '../libs/logger'
 
 export default () => {
   const kafka = new Kafka({
     clientId: 'my-app',
     brokers: ['127.0.0.1:9092'],
   })
-
-  const producer = kafka.producer()
+  const topic = 'topic-test'
   const consumer = kafka.consumer({ groupId: 'test-group' })
 
   const run = async () => {
-    // Producing
-    await producer.connect()
-    await producer.send({
-      topic: 'test-topic',
-      messages: [{ value: 'Hello KafkaJS user!' }],
-    })
-
-    // Consuming
     await consumer.connect()
-    await consumer.subscribe({ topic: 'udists-sg-crc', fromBeginning: true })
-
+    await consumer.subscribe({ topic, fromBeginning: true })
     await consumer.run({
-      eachMessage: async ({ partition, message }) => {
-        console.log({
-          partition,
-          offset: message.offset,
-          value: message.value.toString(),
-        })
+      // eachBatch: async ({ batch }) => {
+      //   console.log(batch)
+      // },
+      eachMessage: async ({ topic, partition, message }) => {
+        const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`
+        console.log(`- ${prefix} ${message.key}#${message.value}`)
       },
     })
   }
 
-  run().catch(console.error)
+  run().catch((e) => console.error(`[example/consumer] ${e.message}`, e))
 
   const errorTypes = ['unhandledRejection', 'uncaughtException']
   const signalTraps = ['SIGTERM', 'SIGINT', 'SIGUSR2']
 
-  errorTypes.map((type) => {
+  errorTypes.forEach((type) => {
     process.on(type, async (e) => {
       try {
         console.log(`process.on ${type}`)
@@ -51,7 +40,7 @@ export default () => {
     })
   })
 
-  signalTraps.map((type) => {
+  signalTraps.forEach((type) => {
     process.once(type, async () => {
       try {
         await consumer.disconnect()

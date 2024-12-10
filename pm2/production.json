@@ -1,0 +1,16 @@
+{
+  "name": "kafka-practice",
+  "script": "/home/work/kafka-practice/server/app.js",
+  "error_file": "/data/logs/pm2/kafka-practice/error.log",
+  "out_file": "/data/logs/pm2/kafka-practice/out.log",
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "exec_mode": "fork",
+  "instances": 1,
+  "merge_logs": true,
+  "ignore_watch": [
+    "node_modules"
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

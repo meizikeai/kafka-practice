@@ -1,0 +1,13 @@
+{
+  "name": "kafka-practice",
+  "script": "/home/work/kafka-practice/server/app.js",
+  "error_file": "/data/logs/pm2/kafka-practice/error.log",
+  "out_file": "/data/logs/pm2/kafka-practice/out.log",
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "ignore_watch": [
+    "node_modules"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
